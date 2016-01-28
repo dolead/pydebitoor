@@ -3,6 +3,7 @@ PyDebitoor: Connect to Debitoor API
 ***********************************
 
 PyDebitoor is a library to access to basic Debitoor operation resources through its REST API.
+Currently, it only can manage customers, invoices and draft.
 
 .. code-block:: python
 
@@ -12,9 +13,6 @@ PyDebitoor is a library to access to basic Debitoor operation resources through 
     service = client.get_service('CustomerService')
 
     service.list()  # Getting all customers
-    >>> []
-
-    client.get_campaigns(1951282421)  # Getting campaign with Id 1951282421
     >>> [{'address': 'Customer1 Address',
           'countryCode': 'FR',
           'email': 'Customer1 Email',
@@ -28,3 +26,14 @@ PyDebitoor is a library to access to basic Debitoor operation resources through 
           'number': 2,
           'paymentTermsId': 3
          }]
+
+SUPPORTED SERVICES:
+* CustomerService
+* DraftService
+* InvoiseService
+
+TODO:
+* Support all services (product, expenses, quotes, incomes, etc.)
+* Better Error management
+* Testing (need a sandbox environment)
+* Better commentaries and examples
