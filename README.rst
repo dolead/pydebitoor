@@ -2,7 +2,7 @@
 PyDebitoor: Connect to Debitoor API
 ***********************************
 
-PyDebitoor is a library to access to basic Debitoor operation resources through its REST API.
+PyDebitoor is a library to access to basic Debitoor_ operation resources through its REST API.
 Currently, it only can manage customers, invoices and draft.
 
 .. _Debitoor : https://debitoor.com
