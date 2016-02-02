@@ -12,4 +12,4 @@ setup(name='pydebitoor',
       author='François Schmidts',
       author_email='francois.schmidts@dolead.com',
       install_requires=['requests'],
-      packages=['pydebitoor'])
+      packages=['pydebitoor', 'pydebitoor.services'])
