@@ -49,9 +49,55 @@ class InvoiceService(BaseService):
         uri = '{}/{}/copy/v1'.format(self.uri, invoice_id, self.version)
         self.client.post(uri, payload={})
 
-    def email(self, invoice_id):
+    def email(self, invoice_id, recipient, subject,
+              cc_recipient=None, message=None, attachment_name=None,
+              copy_mail=False, country_code=None):
+        """
+        Send invoice.
+
+        Parameters
+        ----------
+        invoice_id: str
+            ID of the draft invoice
+        recipient: str
+            Email of the recipient. Must be a valid email.
+        subject: str
+            Subject of the Email.
+        cc_recipient: str or None
+            If set, send the email throught CC to this recipient.
+            Must be a valid email.
+        message: str or None
+            Email message. Optional
+        attachment_name: str or None
+            If set, invoice file will be named after this parameter.
+        copy_mail: bool
+            If true, send to yourself a BCC of this email.
+        country_code: str or None
+            Country code of the recipient.
+            Must be a valid country code known by debitoor if specified.
+            If not specified the current user country will be used.
+        """
+        payload = {
+            'recipient': recipient,
+            'subject': subject,
+        }
+        if cc_recipient:
+            payload['ccRecipient'] = cc_recipient
+
+        if message:
+            payload['message'] = message
+
+        if attachment_name:
+            payload['attachmentName'] = attachment_name
+
+        if copy_mail:
+            payload['copyMail'] = copy_mail
+
+        if country_code:
+            payload['countryCode'] = country_code
+
         uri = '{}/{}/email/v2'.format(self.uri, invoice_id)
-        self.client.post(uri, payload={})
+        return self.client.post(uri, payload=payload)
 
     def pdf(self, invoice_id):
         uri = '{}/{}/pdf/'.format(self.uri, invoice_id, self.version)

@@ -12,7 +12,8 @@ class BaseService(object):
 
     def __make_uri(self, uri=None, element_id=None):
         assert self.uri is not None and self.version is not None, \
-            'Must inherit from BaseService'
+            'Service does not have a specific URI set. ' \
+            'CRUD operation are disabled'
         if uri:
             return '{}/{}'.format(uri, self.version)
         elif element_id:

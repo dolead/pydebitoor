@@ -14,7 +14,7 @@ Currently, it only can manage customers, invoices and draft.
     client = DebitoorClient('access_token')
     service = client.get_service('CustomerService')
 
-    service.list()  # Getting all customers
+    service.list() # Getting all customers
     >>> [{'address': 'Customer1 Address',
           'countryCode': 'FR',
           'email': 'Customer1 Email',
@@ -32,7 +32,8 @@ Currently, it only can manage customers, invoices and draft.
 SUPPORTED SERVICES:
  - CustomerService
  - DraftService
- - InvoiseService
+ - InvoiceService
+ - TaxService
 
 TODO:
  - Support all services (product, expenses, quotes, incomes, etc.)
