@@ -6,7 +6,7 @@ class InvoiceService(BaseService):
 
     uri = '/sales/invoices'
     version = 'v1'
-    validation_uri = '/sales/invoices/validate'
+    validation_uri = '/sales/invoices/validate/v1'
 
     def list(self, from_date=None, to_date=None):
         query_params = {}
@@ -100,11 +100,11 @@ class InvoiceService(BaseService):
         return self.client.post(uri, payload=payload)
 
     def pdf(self, invoice_id):
-        uri = '{}/{}/pdf/'.format(self.uri, invoice_id, self.version)
+        uri = '{}/{}/pdf/{}'.format(self.uri, invoice_id, self.version)
         self.client.get(uri, payload={})
 
     def thumbnail(self, invoice_id):
-        uri = '{}/{}/thumbnail/'.format(self.uri, invoice_id, self.version)
+        uri = '{}/{}/thumbnail/{}'.format(self.uri, invoice_id, self.version)
         self.client.get(uri, payload={})
 
     def headers(self, invoice_id=None, from_date=None, to_date=None):

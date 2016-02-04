@@ -6,7 +6,7 @@ class CustomerService(BaseService):
 
     uri = '/customers'
     version = 'v1'
-    validation_uri = '/sales/customers/validate'
+    validation_uri = '/sales/customers/validate/v1'
     allow_partial_update = True
 
     def create(self, customer, auto_number=False):

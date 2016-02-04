@@ -6,7 +6,7 @@ import requests
 from requests.exceptions import HTTPError
 
 from .errors import RequestError, NotFoundError
-from .services import CustomerService, InvoiceService, DraftService
+from .services import (CustomerService, InvoiceService, DraftService, TaxService)
 
 DEFAULT_API_URL = 'https://api.debitoor.com/api'
 
@@ -17,6 +17,7 @@ SERVICE_MAPPING = {
     'CustomerService': CustomerService,
     'DraftService': DraftService,
     'InvoiceService': InvoiceService,
+    'TaxService': TaxService
 }
 
 

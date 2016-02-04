@@ -10,7 +10,7 @@ class DraftService(InvoiceService):
 
     uri = '/sales/draftinvoices'
     version = 'v1'
-    validation_uri = '/sales/draftinvoices/validate'
+    validation_uri = '/sales/draftinvoices/validate/v1'
 
     def complete(self, draft_id, update_auto_number=False):
         """

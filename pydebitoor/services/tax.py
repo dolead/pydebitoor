@@ -2,7 +2,7 @@
 from pydebitoor.services.base import BaseService
 
 
-class CustomerService(BaseService):
+class TaxService(BaseService):
 
     def purchase_tax_rates(self, supplier_country_code,
                            date, category_id=None):
@@ -84,4 +84,4 @@ class CustomerService(BaseService):
             'mapFromDate': date
         }
 
-        return self.client.get('sales/taxrates/v1', **query_params)
+        return self.client.get('/sales/taxrates/v1', **query_params)
