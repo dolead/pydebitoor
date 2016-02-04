@@ -39,11 +39,11 @@ class InvoiceService(BaseService):
                                   expand_product)
         return self._get(invoice_id, **query_params)
 
-    def update(self, invoice_id, expand_customer=False, expand_product=False):
+    def update(self, invoice_id, payload, expand_customer=False, expand_product=False):
         query_params = {}
         self._build_expand_params(query_params, expand_customer,
                                   expand_product)
-        return self._update(invoice_id, **query_params)
+        return self._update(invoice_id, payload, **query_params)
 
     def copy(self, invoice_id):
         uri = '{}/{}/copy/v1'.format(self.uri, invoice_id, self.version)
