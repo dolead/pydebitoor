@@ -100,7 +100,7 @@ class DebitoorClient(object):
         if 200 <= response.status_code <= 299:
             if 'application/json' in response.headers['content-type']:
                 return response.json()
-            return response.text
+            return response.content
 
         elif response.status_code == 400:
             logger.debug('Invalid request: %s', response.json())
