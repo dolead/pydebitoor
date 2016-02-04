@@ -80,7 +80,6 @@ class BaseService(object):
         -------
 
         """
-        self.validate(element)
         return self.client.post(self.__make_uri(), payload=element, **query_params)
 
     def _list(self, **query_params):
