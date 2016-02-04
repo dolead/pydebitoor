@@ -49,25 +49,25 @@ class BaseService(object):
             response.raise_for_status()
 
     def list(self):
-        return self.__list()
+        return self._list()
 
 
     def create(self, element):
-        return self.__create(element)
+        return self._create(element)
 
     def get(self, element_id):
-        return self.__get(element_id)
+        return self._get(element_id)
 
     def delete(self, element_id):
-        return self.__delete(element_id)
+        return self._delete(element_id)
 
     def update(self, element_id, payload):
-        return self.__update(element_id, payload)
+        return self._update(element_id, payload)
 
     def partial_update(self, element_id, payload):
-        return self.__partial_update(element_id, payload)
+        return self._partial_update(element_id, payload)
 
-    def __create(self, element, **query_params):
+    def _create(self, element, **query_params):
         """
         Abstract element creator
 
@@ -83,19 +83,19 @@ class BaseService(object):
         self.validate(element)
         return self.client.post(self.__make_uri(), payload=element, **query_params)
 
-    def __list(self, **query_params):
+    def _list(self, **query_params):
         return self.client.get(self.__make_uri(), **query_params)
 
-    def __get(self, element_id, **query_params):
+    def _get(self, element_id, **query_params):
         return self.client.get(self.__make_uri(element_id=element_id), **query_params)
 
-    def __delete(self, element_id, **query_params):
+    def _delete(self, element_id, **query_params):
         return self.client.delete(self.__make_uri(element_id=element_id), **query_params)
 
-    def __update(self, element_id, payload, **query_params):
+    def _update(self, element_id, payload, **query_params):
         return self.client.put(self.__make_uri(element_id=element_id), payload, **query_params)
 
-    def __partial_update(self, element_id, payload, **query_params):
+    def _partial_update(self, element_id, payload, **query_params):
         if not self.allow_partial_update:
             raise ValueError('%s does not support partial update' % self.__class__.__name__)
         return self.client.patch(self.__make_uri(element_id=element_id), payload, **query_params)

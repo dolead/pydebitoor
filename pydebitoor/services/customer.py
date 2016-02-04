@@ -28,7 +28,7 @@ class CustomerService(BaseService):
         query_params = {}
         if auto_number:
             query_params = {'autonumber': 'true'}
-        return self.__create(customer, **query_params)
+        return self._create(customer, **query_params)
 
     def update(self, customer_id, customer, auto_number=False):
         """
@@ -45,4 +45,4 @@ class CustomerService(BaseService):
         query_params = {}
         if auto_number:
             query_params = {'autonumber': 'true'}
-        return self.__update(customer_id, customer, **query_params)
+        return self._update(customer_id, customer, **query_params)

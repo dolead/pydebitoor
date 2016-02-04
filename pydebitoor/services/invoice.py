@@ -12,7 +12,7 @@ class InvoiceService(BaseService):
         query_params = {}
 
         self._build_interval_params(query_params, from_date, to_date)
-        return self.__list(**query_params)
+        return self._list(**query_params)
 
     @classmethod
     def _build_interval_params(cls, query_params, from_date, to_date):
@@ -37,17 +37,17 @@ class InvoiceService(BaseService):
         query_params = {}
         self._build_expand_params(query_params, expand_customer,
                                   expand_product)
-        return self.__get(invoice_id, **query_params)
+        return self._get(invoice_id, **query_params)
 
     def update(self, invoice_id, expand_customer=False, expand_product=False):
         query_params = {}
         self._build_expand_params(query_params, expand_customer,
                                   expand_product)
-        return self.__get(invoice_id, **query_params)
+        return self._get(invoice_id, **query_params)
 
     def copy(self, invoice_id):
         uri = '{}/{}/copy/v1'.format(self.uri, invoice_id, self.version)
-        return self.client.post(uri, payload={})
+        self.client.post(uri, payload={})
 
     def email(self, invoice_id, recipient, subject,
               cc_recipient=None, message=None, attachment_name=None,
@@ -100,12 +100,12 @@ class InvoiceService(BaseService):
         return self.client.post(uri, payload=payload)
 
     def pdf(self, invoice_id):
-        uri = '{}/{}/pdf/{}'.format(self.uri, invoice_id, self.version)
-        return self.client.get(uri, payload={})
+        uri = '{}/{}/pdf/'.format(self.uri, invoice_id, self.version)
+        self.client.get(uri, payload={})
 
     def thumbnail(self, invoice_id):
-        uri = '{}/{}/thumbnail/{}'.format(self.uri, invoice_id, self.version)
-        return self.client.get(uri, payload={})
+        uri = '{}/{}/thumbnail/'.format(self.uri, invoice_id, self.version)
+        self.client.get(uri, payload={})
 
     def headers(self, invoice_id=None, from_date=None, to_date=None):
         query_params = {}
