@@ -101,14 +101,13 @@ class DebitoorClient(object):
             if 'application/json' in response.headers['content-type']:
                 return response.json()
             return response.content
-
         elif response.status_code == 400:
-            logger.debug('Invalid request: %s', response.json())
+            logger.debug('Invalid request: %s', response.text)
             raise RequestError(response=response)
         elif response.status_code == 404:
             logger.debug('Invalid API endpoint: %s', url)
             raise NotFoundError(response=response)
-        logger.debug('API Error [HTTP Code %s]: ',
+        logger.debug('API Error [HTTP Code %s]: %s',
                      response.status_code, response.text)
         response.raise_for_status()
 
