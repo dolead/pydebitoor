@@ -100,11 +100,11 @@ class InvoiceService(BaseService):
         return self.client.post(uri, payload=payload)
 
     def pdf(self, invoice_id):
-        uri = '{}/{}/pdf/'.format(self.uri, invoice_id, self.version)
+        uri = '{}/{}/pdf/{}'.format(self.uri, invoice_id, self.version)
         self.client.get(uri, payload={})
 
     def thumbnail(self, invoice_id):
-        uri = '{}/{}/thumbnail/'.format(self.uri, invoice_id, self.version)
+        uri = '{}/{}/thumbnail/{}'.format(self.uri, invoice_id, self.version)
         self.client.get(uri, payload={})
 
     def headers(self, invoice_id=None, from_date=None, to_date=None):
