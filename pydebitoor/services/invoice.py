@@ -101,11 +101,11 @@ class InvoiceService(BaseService):
 
     def pdf(self, invoice_id):
         uri = '{}/{}/pdf/{}'.format(self.uri, invoice_id, self.version)
-        self.client.get(uri, payload={})
+        return self.client.get(uri, payload={})
 
     def thumbnail(self, invoice_id):
         uri = '{}/{}/thumbnail/{}'.format(self.uri, invoice_id, self.version)
-        self.client.get(uri, payload={})
+        return self.client.get(uri, payload={})
 
     def headers(self, invoice_id=None, from_date=None, to_date=None):
         query_params = {}
