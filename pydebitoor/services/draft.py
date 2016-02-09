@@ -35,5 +35,5 @@ class DraftService(InvoiceService):
 
         if update_auto_number:
             query_params = {'updateAutoNumber': 'true'}
-        uri = '{}/{}/book/v1'.format(self.uri, self.version)
+        uri = '{}/{}/book/{}'.format(self.uri, draft_id, self.version)
         self.client.post(uri, payload={}, **query_params)
