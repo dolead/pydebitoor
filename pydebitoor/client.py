@@ -3,16 +3,14 @@ import json
 import logging
 
 import requests
-from requests.exceptions import HTTPError
+from requests.exceptions import ConnectionError, HTTPError
 
 from .errors import RequestError, NotFoundError
-from .services import (CustomerService, InvoiceService, DraftService, TaxService)
-
-DEFAULT_API_URL = 'https://api.debitoor.com/api'
+from .services import (CustomerService, InvoiceService, DraftService,
+                       TaxService)
 
 logger = logging.getLogger('pydebitoor')
-
-
+DEFAULT_API_URL = 'https://api.debitoor.com/api'
 SERVICE_MAPPING = {
     'CustomerService': CustomerService,
     'DraftService': DraftService,
@@ -30,7 +28,7 @@ class DebitoorClient(object):
 
     def __ensure_credentials(self):
         """
-        Check if credentials are valid pby performing a
+        Check if credentials are valid by performing a
         base query.
 
         Raises
@@ -40,9 +38,9 @@ class DebitoorClient(object):
         """
         try:
             self.get('/environment/v1')
-        except HTTPError as e:
+        except HTTPError as exc:
             logger.exception('Could not connect to the API')
-            raise ConnectionError(e)
+            raise ConnectionError(exc)
 
     def __make_url(self, uri):
         """
@@ -182,7 +180,8 @@ class DebitoorClient(object):
         """
         if isinstance(payload, dict):
             payload = json.dumps(payload)
-        return self.__execute('PUT', self.__make_url(uri), data=payload, params=params)
+        return self.__execute('PUT', self.__make_url(uri), data=payload,
+                              params=params)
 
     def delete(self, uri, **params):
         """
